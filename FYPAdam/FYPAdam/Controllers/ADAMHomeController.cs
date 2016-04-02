@@ -215,6 +215,40 @@ namespace FYPAdam.Controllers
             }
             return this.Json(nameList, JsonRequestBehavior.AllowGet);
         }
+
+
+        //related products
+        public JsonResult RelatedProducts(string RelatedProdName, int RelatedProdId)
+        {
+            List<Product> nameList = new List<Product>();
+
+            try
+            {
+
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Utilities.EngineUrl + "Home/RelatedProducts?RelatedProdName=" + RelatedProdName + "&RelatedProdId=" + RelatedProdId);
+                request.Timeout = 12000000;
+                request.KeepAlive = false;
+                request.ProtocolVersion = HttpVersion.Version10;
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+                var serializer = new JavaScriptSerializer();
+
+                StreamReader stream = new StreamReader(response.GetResponseStream());
+                string finalResponse = stream.ReadToEnd();
+                nameList = serializer.Deserialize<List<Product>>(finalResponse);
+
+
+            }
+            catch (WebException wex)
+            {
+                var pageContent = new StreamReader(wex.Response.GetResponseStream())
+                        .ReadToEnd();
+            }
+            return this.Json(nameList, JsonRequestBehavior.AllowGet);
+        }
+
+
+
         //intellisence
         public JsonResult Intellisence()
         {
