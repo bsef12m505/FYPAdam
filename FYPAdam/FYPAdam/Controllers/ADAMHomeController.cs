@@ -157,7 +157,35 @@ namespace FYPAdam.Controllers
 
 
         }
+        //search request
+        public JsonResult Intellisence(int bId)
+        {
+            List<string> nameList = new List<string>();
 
+            try
+            {
+
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Utilities.EngineUrl + "Home/AllProductTtiles");
+                request.Timeout = 12000000;
+                request.KeepAlive = false;
+                request.ProtocolVersion = HttpVersion.Version10;
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+                var serializer = new JavaScriptSerializer();
+
+                StreamReader stream = new StreamReader(response.GetResponseStream());
+                string finalResponse = stream.ReadToEnd();
+                nameList = serializer.Deserialize<List<string>>(finalResponse);
+
+
+            }
+            catch (WebException wex)
+            {
+                var pageContent = new StreamReader(wex.Response.GetResponseStream())
+                        .ReadToEnd();
+            }
+            return this.Json(nameList,JsonRequestBehavior.AllowGet);
+        }
         public ActionResult Products(int bId)
         {
             List<Brand> brandList = new List<Brand>();
