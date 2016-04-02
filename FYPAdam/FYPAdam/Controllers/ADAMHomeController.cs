@@ -158,7 +158,7 @@ namespace FYPAdam.Controllers
 
         }
         //search request
-        public JsonResult Intellisence(int bId)
+        public JsonResult Intellisence()
         {
             List<string> nameList = new List<string>();
 
