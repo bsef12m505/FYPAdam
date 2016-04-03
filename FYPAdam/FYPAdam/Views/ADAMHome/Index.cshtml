@@ -199,7 +199,7 @@
                     </div>
                     <div class="container">
                         <div class="col-lg-1">
-                            <button type="submit" class="btn btn-default" onclick="location.href = '../../FYPAdam/ADAMHome/Login'" id="LoginBut"><strong>Login</strong></button>
+                            <button type="submit" class="btn btn-default" onclick="location.href = '../../ADAMHome/Login'" id="LoginBut"><strong>Login</strong></button>
                         </div>
                     </div>
                 </nav>
@@ -209,12 +209,13 @@
 
     <script type="text/javascript">
 
-        $.getScript('../../FYPAdam/Scripts/jquery-ui.js');
+        $.getScript('../../Scripts/jquery-ui.js');
         function TitleIntellisecce() {
 
             var titles = [];
             $.ajax({
-                url: 'http://localhost/Engine/Home/AllProductTtiles',
+                url: '../../ADAMHome/Intellisence',
+               
                 type: 'Get',
                 dataType: 'json',
                 success: function (data) {
@@ -241,8 +242,13 @@
 
             document.getElementById("ProductSearch").scrollIntoView();
             $.ajax({
+                headers: {
+                    'Access-Control-Allow-Origin': 'http://adam.apphb.com',
+                   
+                },
 
-                url: 'http://localhost/Engine/Home/SearchedProduct',
+                url: '../../ADAMHome/SearchedProduct',
+              
                 type: 'Get',
                 data: { name: prodTitle},
                 dataType: 'json',
@@ -251,7 +257,7 @@
                     $("#prodRow").show();
                     $("#prodimg").attr("src", data.ImageUrl);
                     $("#prodName").text(data.Title);
-                    $("#prodName").attr("href","../../FYPAdam/ADAMHome/ProductDetails?pId="+data.Id);
+                    $("#prodName").attr("href","../../ADAMHome/ProductDetails?pId="+data.Id);
                     var removedNewLines=data.ProductDescription.trim();
                     var removeWhiteSpaces=removedNewLines.replace(/\s+/, '');
                     var arr=removeWhiteSpaces.split("\n");
@@ -482,7 +488,7 @@
                         <div class="row">
                             <div class="col-lg-8"></div>
                             <div class="col-lg-2">
-                                <button type="button" class="btn btn-primary btn-lg" onclick="location.href = '../../FYPAdam/ADAMHome/Products?bId='+@bId">See More</button>
+                                <button type="button" class="btn btn-primary btn-lg" onclick="location.href = '../../ADAMHome/Products?bId='+@bId">See More</button>
                             </div>
                         </div>
                     </div>
@@ -708,7 +714,7 @@
 
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    url: 'http://localhost/Engine/Home/CompareProducts',
+                    url: '../../ADAMHome/CompareProducts',
 
                     async: true,
                     success: function (result) {

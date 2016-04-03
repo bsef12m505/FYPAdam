@@ -490,7 +490,7 @@
 
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
-                    url: 'http://localhost/Engine/Home/RelatedProducts',
+                    url: '../../ADAMHome/RelatedProducts',
 
                     async: true,
                     success: function (result) {
@@ -500,7 +500,7 @@
                             $("#relatedProdRow"+j).show();
                             $("#relatedProdimg"+j).attr("src", product.ImageUrl);
                             $("#relatedProdName"+j).text(product.Title);
-                            $("#relatedProdName"+j).attr("href","../../FYPAdam/ADAMHome/ProductDetails?pId="+product.Id);
+                            $("#relatedProdName"+j).attr("href","../../ADAMHome/ProductDetails?pId="+product.Id);
                             $("#relatedProddesc"+j).text(product.ProductDescription);
 
                             str=str+j;
