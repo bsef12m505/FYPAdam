@@ -305,7 +305,7 @@
     <Content Include="img\images.jpg" />
     <Content Include="img\lap.png" />
     <Content Include="img\logo-asus.png" />
-    <Content Include="img\Logo.jpg" />
+    <Content Include="img\logo.png" />
     <Content Include="img\Originals\Adam1.png" />
     <Content Include="img\Originals\dell-Logo.jpg" />
     <Content Include="img\Originals\dell-Logo1.jpg" />
@@ -475,6 +475,7 @@
     <Content Include="Views\User\UserDashboard.cshtml" />
     <Content Include="Views\ADAMHome\temp.cshtml" />
     <Content Include="Views\ADAMHome\Trends.cshtml" />
+    <Content Include="Views\ADAMHome\WeeklyTrends.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

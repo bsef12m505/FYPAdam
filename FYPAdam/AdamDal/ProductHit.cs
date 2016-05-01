@@ -11,18 +11,14 @@ namespace AdamDal
 {
     using System;
     using System.Collections.Generic;
-    using System.Web.Script.Serialization;
     
-    public partial class Specification
+    public partial class ProductHit
     {
-        public Specification()
-        {
-            this.Product_Specification = new HashSet<Product_Specification>();
-        }
+        public int id { get; set; }
+        public int ProductId { get; set; }
+        public int SearchCount { get; set; }
+        public System.DateTime Date { get; set; }
     
-        public int Id { get; set; }
-        public string Name { get; set; }
-    [ScriptIgnore]
-        public virtual ICollection<Product_Specification> Product_Specification { get; set; }
+        public virtual Product Product { get; set; }
     }
 }

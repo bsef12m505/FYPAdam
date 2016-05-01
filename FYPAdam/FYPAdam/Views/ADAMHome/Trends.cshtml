@@ -23,97 +23,235 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
 
-        google.charts.load('current', { 'packages': ['bar', 'line', 'corechart'] });
+        google.charts.load('current', { 'packages': ['bar', 'line', 'corechart', 'gauge'] });
         google.charts.setOnLoadCallback(drawChart);
         function drawChart() {
-            var postiveFeatures = @Html.Raw(Json.Encode(@ViewBag.pFeatureList));
-            var positiveFeatureCount=@Html.Raw(Json.Encode(@ViewBag.pCountList));
-            var negativeFeatures = @Html.Raw(Json.Encode(@ViewBag.nFeatureList));
-            var FeatureCount=@Html.Raw(Json.Encode(@ViewBag.nCountList));
-            var listColors=@Html.Raw(Json.Encode(@ViewBag.color));
+            var bNamesArray = @Html.Raw(Json.Encode(@ViewBag.brandNamesMob));
+            var bFollowersArray = @Html.Raw(Json.Encode(@ViewBag.fCountMob));
+            var datesArray = @Html.Raw(Json.Encode(@ViewBag.weekDates));
+            var laptopBNamesArray = @Html.Raw(Json.Encode(@ViewBag.brandNamesLaptop));
+            var laptopBFollowersArray = @Html.Raw(Json.Encode(@ViewBag.fCountLaptop));
             var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Name');
-            data.addColumn('number', 'Value');
-            data.addColumn({ type: 'string', role: 'style' });
-            data.addRows([
-                ['2014', 600, 'color: #9d426b'],
-                ['2015', 700, 'color: #3fb0e9'],
-                ['2016', 800, 'color: #42c698'],
-                ['2016', 900, 'color: red'],
-                ['2016', 1000, 'color: gold']
-            ]);
+            data.addColumn('string', 'Time of Day');
+
+            for (var i = 0; i < bNamesArray.length; i++) {
+                data.addColumn('number', bNamesArray[i]);
+               
+            }
+            data.addRows(bFollowersArray[0].length);
+            
+            
+            var z=0;
+            
+            for (var i = 0; i <  bFollowersArray[0].length; i++) {
+                
+                
+
+                for(var j=0;j<bFollowersArray.length;j++)
+                {
+                    if(j==0)
+                    {
+                        
+                        data.setCell(i, 0, datesArray[z]);
+                       
+                        z++;
+                       
+                    }
+                    else{
+                        data.setCell(i,j, bFollowersArray[j][i]);
+                    }
+                    
+                }
+               
+            }
+
+           
 
             var options = {
-                chart: {
-                    title: 'Company Performance',
-                    subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-                },
-                title: 'Trending Products Chart',
+                title: 'Brand Ratings this week',
+                width: 1119,
+                height: 500,
                 hAxis: {
-                    title: 'Popularity',
+                    format: 'M/d/yy',
+                    gridlines: { count: 3 }
                 },
-                bars: 'horizontal', // Required for Material Bar Charts.
-                width: 712,
-                height: 370,
-                legend: { position: 'none' },
+                vAxis: {
+                    gridlines: { color: 'none' },
+                    minValue: 0,
+                    baseline: 0,
+                },
+                pointSize: 5,
             };
 
+           
+            var chart = new google.visualization.LineChart(document.getElementById('weeklyTrendMobile'));
 
-            var chart = new google.visualization.BarChart(document.getElementById('prodDesc'));
             chart.draw(data, options);
 
             var data1 = new google.visualization.DataTable();
-            data1.addColumn('string', 'Name');
-            data1.addColumn('number', 'Value');
-            data1.addColumn({ type: 'string', role: 'style' });
-            data1.addRows(postiveFeatures.length);
-            for (var i = 0; i < postiveFeatures.length; i++) {
-                data1.setCell(i, 0, postiveFeatures[i]);
-                data1.setCell(i,1, positiveFeatureCount[i]);
-                data1.setCell(i,2, listColors[i]);
+            data1.addColumn('string', 'Time of Day');
+            for (var i = 0; i < laptopBNamesArray.length; i++) {
+                data1.addColumn('number', laptopBNamesArray[i]);
+                
+               
             }
+            data1.addRows(laptopBFollowersArray[0].length);
+
+            z=0;
+            for (var i = 0; i <  laptopBFollowersArray[0].length; i++) {
+                
+                
+
+                for(var j=0;j<laptopBFollowersArray.length;j++)
+                {
+                    if(j==0)
+                    {
+                        
+                        data1.setCell(i, 0, datesArray[z]);
+                        
+                        z++;
+                       
+                    }
+                    else{
+                        data1.setCell(i,j, laptopBFollowersArray[j][i]);
+                       
+                    }
+                    
+                }
+               
+            }
+
+
+
             var options1 = {
-
-                title: 'Positive Feature Graph',
+                title: 'Brand Ratings this week',
+                width: 1119,
+                height: 400,
                 hAxis: {
-                    title: 'Popularity',
+                    format: 'M/d/yy',
+                   
                 },
-                bars: 'vertical', // Required for Material Bar Charts.
-                width: 410,
-                height: 290,
-                legend: { position: 'none' },
+                vAxis: {
+                   
+                    minValue: 0,
+                    baseline: 0,
+                },
+                pointSize: 10,
             };
+            
 
-            var chart1 = new google.visualization.BarChart(document.getElementById('positiveFeatureGraph'));
+            var chart1 = new google.visualization.LineChart(document.getElementById('weeklyTrendLaptops'));
+
             chart1.draw(data1, options1);
 
+            var data2 = google.visualization.arrayToDataTable([
+          ['Label', 'Value'],
+          ['Galaxy s7', 80],
+          
+            ]);
 
-
-            var data2 = new google.visualization.DataTable();
-            data2.addColumn('string', 'Name');
-            data2.addColumn('number', 'Value');
-            data2.addColumn({ type: 'string', role: 'style' });
-            data2.addRows(negativeFeatures.length);
-            for (var i = 0; i < negativeFeatures.length; i++) {
-                data2.setCell(i, 0, negativeFeatures[i]);
-                data2.setCell(i,1, FeatureCount[i]);
-                data2.setCell(i,2, listColors[i]);
-            }
             var options2 = {
-
-                title: 'Negative Feature Graph',
-                hAxis: {
-                    title: 'Popularity',
-                },
-                bars: 'vertical', // Required for Material Bar Charts.
-                width: 410,
-                height: 290,
-                legend: {position: 'none'},
+                width: 400, height: 80,
+                redFrom: 90, redTo: 100,
+                yellowFrom: 75, yellowTo: 90,
+                minorTicks: 5
             };
 
-            var chart2 = new google.visualization.BarChart(document.getElementById('negativeFeaturegraph'));
+            var chart2 = new google.visualization.Gauge(document.getElementById('radialProgressGauge'));
+
             chart2.draw(data2, options2);
 
+            var chart3 = new google.visualization.Gauge(document.getElementById('radialProgressGauge1'));
+
+            chart3.draw(data2, options2);
+
+            var chart4 = new google.visualization.Gauge(document.getElementById('radialProgressGauge2'));
+
+            chart4.draw(data2, options2);
+
+           
+           
+
+            
+            var thisWeek = [];
+            var PrevWeek = [];
+            $.ajax({
+                url: '../../FYPAdam/ADAMHome/WeeklyComparisonTrendMobile',
+                type: 'Get',
+                dataType: 'json',
+                success: function (data) {
+                    thisWeek=data[0];//data[0] has the followers count of this week 
+                    
+                    PrevWeek=data[1];//data[1] has the folllwers count of previous week
+
+                    var data5 = new google.visualization.DataTable();
+                    data5.addColumn('string', 'Time of Day');
+                    data5.addColumn('number', 'This Week');
+                    data5.addColumn('number', 'Prev Week');
+                    data5.addRows(bNamesArray.length);
+
+
+                    for (var i = 0; i <  bNamesArray.length; i++) {
+                
+                        data5.setCell(i, 0, bNamesArray[i]);
+                        data5.setCell(i, 1, thisWeek[i]);
+                        data5.setCell(i, 2, PrevWeek[i]);
+              
+                    }
+
+                    var options5 = {
+                        
+                
+                        height: 400,
+                        hAxis: {
+                           
+                    
+                            gridlines: {
+                                color: 'transparent'
+                            }
+                        },
+
+                        
+                        vAxis: {
+                            title: 'Trend',
+                            gridlines: {
+                                color: 'transparent'
+                            }
+                        }
+                    };
+
+                    var chart5 = new google.visualization.ColumnChart(
+                      document.getElementById('weeklyTrendLaptopsComparison'));
+
+                    chart5.draw(data5, options5);
+
+                    //$(data).each(function (index, item) {
+                    //    var weeklyCount = [];
+                    //    $(item).each(function (index1, count) {
+                    //        alert(count);
+                    //        titles.push(count);
+                    //    });
+                        
+                    //});
+                },
+                error: function () {
+                    alert('error');
+                }
+            });
+
+
+            
+            
+                          
+                        
+           
+                   
+
+            
+
+           
+            
+        
 
         }
     </script>
@@ -204,14 +342,174 @@
                                             <h3 class="detail-product">Weekly Trends</h3>
 
                                         </div>
+                                    </div>
+                                        
 
-                                        <div class="row" style="margin-left:10px">
+                                    <div class="row" >
+                                        
+                                        <div class="col-lg-12" >
+                                            <h4>Mobile Brands</h4>
+                                            <div id="weeklyTrendMobile" style="display:none;">
+
+                                            </div>
+                                           
+                                        </div>
+                                   
+
+                                    </div>
+                                <br />
+                                <div class="row">
+
+                                    <div class="col-lg-12">
+                                        <h4>Laptop Brands</h4>
+                                        <div id="weeklyTrendLaptops">
+
+                                        </div>
+                                    </div>
+                                    <br />
+                                </div>
+
+                                    <div class="row">
+
+                                        <div class="col-lg-9">
+                                            <h4>Mobile Brands this week and the previous one</h4>
+                                            <div id="weeklyTrendLaptopsComparison">
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-3" style="margin-top:45px">
+                                            <div class="just-padding">
+
+                                                <div class="list-group list-group-root well">
+
+                                                    <a href="#" class="list-group-item active" id="Laptop">Mobile Brands</a>
+
+                                                    @{
+                                                        int i = 1;
+                                                        int j = 1;
+                                                    }
+
+                                                    @foreach (var cat in @ViewBag.brandNamesMob)
+                                                    {
+               
+                                                            
+
+
+                                                                if (@i <= 8)
+                                                                {
+                                                                    <div class="list-group">
+
+                                                                        <a href='@Url.Action("WeeklyTrends", "ADAMHome", new { catName = "Laptop", bName = @cat })' class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@cat.ToUpper()</a>
+                                                                        @{
+                                                                    ++i;
+                                                                        }
+
+                                                                    </div>
+                                                        
+                                                                   
+                                                                    
+                                                                }
+                                                                
+                                                        }
+
+                                                    <a href="#demo4" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#Laptop"><span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;&nbsp;More Brands</a>
+                                                    <div class="collapse" id="demo4">
+                                                        @foreach (var b in @ViewBag.brandNamesMob)
+                                                        {
+
+                                                            if (@j > 8)
+                                                            {
+
+                                                                <a href="@Url.Action("WeeklyTrends", "ADAMHome", new { catName = "Laptop", bName = @b })" class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.ToUpper()</a>
+
+
+                                                            }
+
+                                                            ++j;
+
+                                                        }
+                                                    </div>
+
+
+
+
+
+
+                                                    </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="row"  style="display:none">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Brand</th>
+                                                        <th>Product</th>
+                                                        <th>Trend</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    @*@foreach (var spec in @Model.Product_Specification)
+                    {*@
+                                                    <tr>
+
+                                                        <td>Samsung</td>
+                                                        <td>
+                                                            <a>Galaxy s7</a><br />
+                                                            <a>Galaxy s7</a>
+                                                        </td>
+
+                                                        <td id="radialProgressGauge"></td>
+
+                                                    </tr>
+
+                                                    <tr>
+
+                                                        <td>Samsung</td>
+                                                        <td>
+                                                            <a>Galaxy s7</a><br />
+                                                            <a>Galaxy s7</a>
+                                                        </td>
+
+                                                        <td id="radialProgressGauge1"></td>
+
+                                                    </tr>
+
+                                                    <tr>
+
+                                                        <td>Samsung</td>
+                                                        <td>
+                                                            <a>Galaxy s7</a><br />
+                                                            <a>Galaxy s7</a>
+                                                        </td>
+
+                                                        <td id="radialProgressGauge2"></td>
+
+                                                    </tr>
+                                                    @*}*@
+
+
+
+
+
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                        @*<div class="row" style="margin-left:10px">
                                             <h5 style="color:black">Samsung</h5>
                                             <p style="margin-left: 10px; color: black">Galaxy s7</p>
                                             <p style="margin-left: 10px; color: black">Galaxy s7</p>
                                             <p style="margin-left: 10px; color: black">Galaxy s7</p>
-                                        </div>
-                                    </div>
+                                        </div>*@
+                                    
 
                                 </div> @* end of weekly trend tab *@
 
@@ -249,6 +547,26 @@
 
          </section>
       </div>
+
+
+    <script>
+        $('#weeklyTrendMobile').show();
+        $(':radio').change(function (event) {
+            var id = $(this).data('id');
+            
+            if (id == "weeklyTrendLaptops")
+            {
+                $('#weeklyTrendMobile').hide();
+                $('#' + id).show();
+            }
+            else {
+                $('#' + id).show();
+                $('#weeklyTrendLaptops').hide();
+            }
+           
+            
+        });
+    </script>
 
     <script src="~/Scripts/jquery-1.11.0.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
