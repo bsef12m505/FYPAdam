@@ -69,14 +69,14 @@
 
             var options = {
                 title: 'Brand Ratings this week',
-                width: 1119,
+                width: 550,
                 height: 500,
                 hAxis: {
                     format: 'M/d/yy',
-                    gridlines: { count: 3 }
+                   
                 },
                 vAxis: {
-                    gridlines: { color: 'none' },
+                   
                     minValue: 0,
                     baseline: 0,
                 },
@@ -125,10 +125,11 @@
 
             var options1 = {
                 title: 'Brand Ratings this week',
-                width: 1119,
-                height: 400,
+                width: 545,
+                height: 500,
                 hAxis: {
                     format: 'M/d/yy',
+                    gridlines: { count: 7 }
                    
                 },
                 vAxis: {
@@ -136,7 +137,7 @@
                     minValue: 0,
                     baseline: 0,
                 },
-                pointSize: 10,
+                pointSize: 5,
             };
             
 
@@ -224,6 +225,7 @@
                       document.getElementById('weeklyTrendLaptopsComparison'));
 
                     chart5.draw(data5, options5);
+                    $(".just-padding").show();
 
                     //$(data).each(function (index, item) {
                     //    var weeklyCount = [];
@@ -347,39 +349,31 @@
 
                                     <div class="row" >
                                         
-                                        <div class="col-lg-12" >
+                                        <div class="col-lg-6" >
                                             <h4>Mobile Brands</h4>
                                             <div id="weeklyTrendMobile" style="display:none;">
 
                                             </div>
                                            
                                         </div>
+
+
+                                        <div class="col-lg-6">
+                                            <h4>Laptop Brands</h4>
+                                            <div id="weeklyTrendLaptops">
+
+                                            </div>
+                                        </div>
                                    
 
                                     </div>
                                 <br />
-                                <div class="row">
-
-                                    <div class="col-lg-12">
-                                        <h4>Laptop Brands</h4>
-                                        <div id="weeklyTrendLaptops">
-
-                                        </div>
-                                    </div>
-                                    <br />
-                                </div>
+                                
 
                                     <div class="row">
 
-                                        <div class="col-lg-9">
-                                            <h4>Mobile Brands this week and the previous one</h4>
-                                            <div id="weeklyTrendLaptopsComparison">
-
-                                            </div>
-                                        </div>
-
                                         <div class="col-lg-3" style="margin-top:45px">
-                                            <div class="just-padding">
+                                            <div class="just-padding" style="display:none">
 
                                                 <div class="list-group list-group-root well">
 
@@ -392,26 +386,26 @@
 
                                                     @foreach (var cat in @ViewBag.brandNamesMob)
                                                     {
-               
-                                                            
 
 
-                                                                if (@i <= 8)
-                                                                {
-                                                                    <div class="list-group">
 
-                                                                        <a href='@Url.Action("WeeklyTrends", "ADAMHome", new { catName = "Laptop", bName = @cat })' class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@cat.ToUpper()</a>
-                                                                        @{
-                                                                    ++i;
-                                                                        }
 
-                                                                    </div>
-                                                        
-                                                                   
-                                                                    
+                                                        if (@i <= 8)
+                                                        {
+                                                            <div class="list-group">
+
+                                                                <a href='@Url.Action("WeeklyTrends", "ADAMHome", new { catName = "Laptop", bName = @cat })' class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@cat.ToUpper()</a>
+                                                                @{
+                                                            ++i;
                                                                 }
-                                                                
+
+                                                            </div>
+
+
+
                                                         }
+
+                                                    }
 
                                                     <a href="#demo4" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#Laptop"><span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;&nbsp;More Brands</a>
                                                     <div class="collapse" id="demo4">
@@ -436,9 +430,20 @@
 
 
 
-                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
+
+
+
+                                        <div class="col-lg-9">
+                                            <h4>Mobile Brands this week and the previous one</h4>
+                                            <div id="weeklyTrendLaptopsComparison">
+
+                                            </div>
+                                        </div>
+
+                                        
 
                                     </div>
 
