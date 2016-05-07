@@ -16,6 +16,7 @@ namespace FYPAdam.Controllers
 {
     public class ADAMHomeController : Controller
     {
+
         public JsonResult CompareProductAjax()
         {
             List<Product> prodList = new List<Product>();
@@ -53,9 +54,8 @@ namespace FYPAdam.Controllers
 
         public JsonResult AllProductTtiles()
         {
-            try
-            {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Utilities.EngineUrl + "Home/AllProductTtiles");
+            try{
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Utilities.EngineUrl + "Home/AllProductTtiles");
                 request.Timeout = 12000000;
                 request.KeepAlive = false;
                 request.ProtocolVersion = HttpVersion.Version10;
