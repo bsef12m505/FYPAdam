@@ -1,5 +1,81 @@
 ﻿@{
+
+
     ViewBag.Title = "WeeklyTrends";
+    Layout = "~/Views/Shared/Navbar.cshtml";
 }
 
-<h2>WeeklyTrends</h2>
+@using DTO;
+
+<!doctype html>
+<html>
+<head>
+    <title></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, maximum-scale=1">
+    
+    <script type="text/javascript">
+
+        google.charts.load('current', { 'packages': ['bar', 'line', 'corechart', 'gauge'] });
+        google.charts.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+       ['Year', 'Sales', 'Expenses'],
+       ['November', 1000, 400],
+       ['December', 1170, 460],
+       ['January', 660, 1120],
+       ['February', 690, 1120],
+       ['March', 780, 1120],
+       ['April', 820, 1120],
+       ['May', 660, 1120],
+       ['June', 1030, 540]
+            ]);
+
+            var options = {
+                title: '',
+                height: 400,
+                backgroundColor: 'none',
+               
+                hAxis: {
+                    title: 'Year',
+                    titleTextStyle: {
+                        color: 'black'
+                    }
+                },
+                
+            };
+
+            var chart = new google.visualization.AreaChart(document.getElementById('comparisonChart'));
+            chart.draw(data, options)
+
+
+        }
+    </script>
+
+
+
+
+
+
+
+</head>
+<body style="background-color: white">
+   
+    <!--Hero_Section-->
+    <div class="container">
+        <div class="row">
+            <div id="comparisonChart">
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div id="comparison">
+                <h4>Trending in Samsung</h4>
+            </div>
+        </div>
+    </div>
+
+       
+</body>
+   <html>

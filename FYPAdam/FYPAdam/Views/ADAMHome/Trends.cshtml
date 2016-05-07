@@ -1,5 +1,7 @@
 ﻿@{
     ViewBag.Title = "Trends";
+    Layout = "~/Views/Shared/Navbar.cshtml";
+}
 }
 
 @using DTO;
@@ -10,17 +12,7 @@
     <title></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, maximum-scale=1">
-    <link rel="icon" href="~/img/favicon.png" type="image/png">
-    <script src="~/Scripts/jquery-1.11.0.min.js"></script>
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Scripts/fancybox/jquery.fancybox.css" rel="stylesheet" />
-    <link href="~/font-awesome/css/style.css" rel="stylesheet" />
-    <link href="~/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link href="~/font-awesome/css/animate.css" rel="stylesheet" />
-    <link href="~/Content/Custom.css" rel="stylesheet" />
-    <link href="~/Content/reveal.css" rel="stylesheet" />
-    <script src="~/Scripts/plugins/flot/jquery.reveal.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   
     <script type="text/javascript">
 
         google.charts.load('current', { 'packages': ['bar', 'line', 'corechart', 'gauge'] });
@@ -36,36 +28,36 @@
 
             for (var i = 0; i < bNamesArray.length; i++) {
                 data.addColumn('number', bNamesArray[i]);
-               
+
             }
             data.addRows(bFollowersArray[0].length);
-            
-            
+
+
             var z=0;
-            
+
             for (var i = 0; i <  bFollowersArray[0].length; i++) {
-                
-                
+
+
 
                 for(var j=0;j<bFollowersArray.length;j++)
                 {
                     if(j==0)
                     {
-                        
+
                         data.setCell(i, 0, datesArray[z]);
-                       
+
                         z++;
-                       
+
                     }
                     else{
                         data.setCell(i,j, bFollowersArray[j][i]);
                     }
-                    
+
                 }
-               
+
             }
 
-           
+
 
             var options = {
                 title: 'Brand Ratings this week',
@@ -73,17 +65,17 @@
                 height: 500,
                 hAxis: {
                     format: 'M/d/yy',
-                   
+
                 },
                 vAxis: {
-                   
+
                     minValue: 0,
                     baseline: 0,
                 },
                 pointSize: 5,
             };
 
-           
+
             var chart = new google.visualization.LineChart(document.getElementById('weeklyTrendMobile'));
 
             chart.draw(data, options);
@@ -92,33 +84,33 @@
             data1.addColumn('string', 'Time of Day');
             for (var i = 0; i < laptopBNamesArray.length; i++) {
                 data1.addColumn('number', laptopBNamesArray[i]);
-                
-               
+
+
             }
             data1.addRows(laptopBFollowersArray[0].length);
 
             z=0;
             for (var i = 0; i <  laptopBFollowersArray[0].length; i++) {
-                
-                
+
+
 
                 for(var j=0;j<laptopBFollowersArray.length;j++)
                 {
                     if(j==0)
                     {
-                        
+
                         data1.setCell(i, 0, datesArray[z]);
-                        
+
                         z++;
-                       
+
                     }
                     else{
                         data1.setCell(i,j, laptopBFollowersArray[j][i]);
-                       
+
                     }
-                    
+
                 }
-               
+
             }
 
 
@@ -130,16 +122,16 @@
                 hAxis: {
                     format: 'M/d/yy',
                     gridlines: { count: 7 }
-                   
+
                 },
                 vAxis: {
-                   
+
                     minValue: 0,
                     baseline: 0,
                 },
                 pointSize: 5,
             };
-            
+
 
             var chart1 = new google.visualization.LineChart(document.getElementById('weeklyTrendLaptops'));
 
@@ -148,7 +140,7 @@
             var data2 = google.visualization.arrayToDataTable([
           ['Label', 'Value'],
           ['Galaxy s7', 80],
-          
+
             ]);
 
             var options2 = {
@@ -170,19 +162,19 @@
 
             chart4.draw(data2, options2);
 
-           
-           
 
-            
+
+
+
             var thisWeek = [];
             var PrevWeek = [];
             $.ajax({
-                url: '../../ADAMHome/WeeklyComparisonTrendMobile',
+                url: '../../FYPAdam/ADAMHome/WeeklyComparisonTrendMobile',
                 type: 'Get',
                 dataType: 'json',
                 success: function (data) {
-                    thisWeek=data[0];//data[0] has the followers count of this week 
-                    
+                    thisWeek=data[0];//data[0] has the followers count of this week
+
                     PrevWeek=data[1];//data[1] has the folllwers count of previous week
 
                     var data5 = new google.visualization.DataTable();
@@ -193,26 +185,26 @@
 
 
                     for (var i = 0; i <  bNamesArray.length; i++) {
-                
+
                         data5.setCell(i, 0, bNamesArray[i]);
                         data5.setCell(i, 1, thisWeek[i]);
                         data5.setCell(i, 2, PrevWeek[i]);
-              
+
                     }
 
                     var options5 = {
-                        
-                
+
+
                         height: 400,
                         hAxis: {
-                           
-                    
+
+
                             gridlines: {
                                 color: 'transparent'
                             }
                         },
 
-                        
+
                         vAxis: {
                             title: 'Trend',
                             gridlines: {
@@ -233,7 +225,7 @@
                     //        alert(count);
                     //        titles.push(count);
                     //    });
-                        
+
                     //});
                 },
                 error: function () {
@@ -242,18 +234,18 @@
             });
 
 
-            
-            
-                          
-                        
-           
-                   
 
-            
 
-           
-            
-        
+
+
+
+
+
+
+
+
+
+
 
         }
     </script>
@@ -267,52 +259,13 @@
 </head>
 <body style="background-color: white">
 
-    <header id="header_wrapper">
-        <div class="container">
-            <div class="header_box">
-                <div class="logo">
-                    <a href="../../ADAMHome/index">
-                        <img src="~/img/logo.png" alt="logo" style="width: 60%;">
-                    </a>
-                </div>
-                <nav class="navbar navbar-inverse" role="navigation">
-                    <div class="navbar-header">
-                        <button type="button" id="nav-toggle" class="navbar-toggle" data-toggle="collapse" data-target="#main-nav"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                    </div>
-                    <div id="main-nav" class="navbar-header" @*class="collapse navbar-collapse navStyle"*@>
-                        <ul class="nav nav-pills" id="mainNav">
-                            <li class="active"><a href="../../ADAMHome/index" class="scroll-link"><strong>Home</strong></a></li>
-                            <li><a href="#service" class="scroll-link"><strong>Top Rated Products</strong></a></li>
-                            <li><a href="#ProductReview" class="scroll-link"><strong>Trends</strong></a></li>
-                            <li><a href="#contact" class="scroll-link"><strong>Contact</strong></a></li>
-                        </ul>
-
-                    </div>
-                    <div class="col-lg-4">
-                        <div>
-
-                            <input type="text" placeholder="Search here..." id="searchTextBox" onfocus="TitleIntellisecce()">
-
-                            <button type="submit" class="btn btn-default" id="search" onclick="SearchProduct()"><strong>Search</strong></button>
-                        </div>
-
-
-                    </div>
-                    <div class="container">
-                        <div class="col-lg-1">
-                            <button type="submit" class="btn btn-default" onclick="location.href = '../../ADAMHome/Login'" id="LoginBut"><strong>Login</strong></button>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    </header>
+   
     <!--Hero_Section-->
     <div class="container">
         @*<section id="prodDescription_section" class="ProductPageTop" style="display: none">
-            <div class="hero_wrapper" id="prodGraph" style="margin-left: 180px; align-content: center; background-color: #F5F5F5; display: none">
-            </div>
-        </section>*@
+                <div class="hero_wrapper" id="prodGraph" style="margin-left: 180px; align-content: center; background-color: #F5F5F5; display: none">
+                </div>
+            </section>*@
         <!--Hero_Section-->
         <!--Service-->
         <section id="service">
@@ -345,16 +298,16 @@
 
                                         </div>
                                     </div>
-                                        
 
-                                    <div class="row" >
-                                        
-                                        <div class="col-lg-6" >
+
+                                    <div class="row">
+
+                                        <div class="col-lg-6">
                                             <h4>Mobile Brands</h4>
                                             <div id="weeklyTrendMobile" style="display:none;">
 
                                             </div>
-                                           
+
                                         </div>
 
 
@@ -364,11 +317,11 @@
 
                                             </div>
                                         </div>
-                                   
+
 
                                     </div>
-                                <br />
-                                
+                                    <br />
+
 
                                     <div class="row">
 
@@ -392,14 +345,14 @@
 
                                                         if (@i <= 8)
                                                         {
-                                                            <div class="list-group">
+                                                        <div class="list-group">
 
-                                                                <a href='@Url.Action("WeeklyTrends", "ADAMHome", new { catName = "Laptop", bName = @cat })' class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@cat.ToUpper()</a>
-                                                                @{
+                                                            <a href='@Url.Action("WeeklyTrends", "ADAMHome", new { catName = "Laptop", bName = @cat })' class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@cat.ToUpper()</a>
+                                                            @{
                                                             ++i;
-                                                                }
+                                                            }
 
-                                                            </div>
+                                                        </div>
 
 
 
@@ -415,7 +368,7 @@
                                                             if (@j > 8)
                                                             {
 
-                                                                <a href="@Url.Action("WeeklyTrends", "ADAMHome", new { catName = "Laptop", bName = @b })" class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.ToUpper()</a>
+                                                            <a href="@Url.Action("WeeklyTrends", "ADAMHome", new { catName = "Laptop", bName = @b })" class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.ToUpper()</a>
 
 
                                                             }
@@ -443,11 +396,11 @@
                                             </div>
                                         </div>
 
-                                        
+
 
                                     </div>
 
-                                    <div class="row"  style="display:none">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
+                                    <div class="row" style="display:none">
                                         <div class="table-responsive">
                                             <table class="table table-bordered">
                                                 <thead>
@@ -461,7 +414,7 @@
                                                 <tbody>
 
                                                     @*@foreach (var spec in @Model.Product_Specification)
-                    {*@
+                                                        {*@
                                                     <tr>
 
                                                         <td>Samsung</td>
@@ -508,13 +461,13 @@
                                         </div>
                                     </div>
 
-                                        @*<div class="row" style="margin-left:10px">
+                                    @*<div class="row" style="margin-left:10px">
                                             <h5 style="color:black">Samsung</h5>
                                             <p style="margin-left: 10px; color: black">Galaxy s7</p>
                                             <p style="margin-left: 10px; color: black">Galaxy s7</p>
                                             <p style="margin-left: 10px; color: black">Galaxy s7</p>
                                         </div>*@
-                                    
+
 
                                 </div> @* end of weekly trend tab *@
 
@@ -550,15 +503,15 @@
                 </div>
             </div>
 
-         </section>
-      </div>
+        </section>
+    </div>
 
 
     <script>
         $('#weeklyTrendMobile').show();
         $(':radio').change(function (event) {
             var id = $(this).data('id');
-            
+
             if (id == "weeklyTrendLaptops")
             {
                 $('#weeklyTrendMobile').hide();
@@ -568,22 +521,13 @@
                 $('#' + id).show();
                 $('#weeklyTrendLaptops').hide();
             }
-           
-            
+
+
         });
     </script>
 
-    <script src="~/Scripts/jquery-1.11.0.min.js"></script>
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/jquery-scrolltofixed.js"></script>
-    <script src="~/Scripts/jquery.nav.js"></script>
-    <script src="~/Scripts/jquery.easing.1.3.js"></script>
-    <script src="~/Scripts/jquery.isotope.js"></script>
-    <script src="~/Scripts/fancybox/jquery.fancybox.pack.js"></script>
-    <script src="~/Scripts/wow.js"></script>
-    <script src="~/Scripts/custom.js"></script>
-    <script src="~/Scripts/jquery.reveal.js"></script>
-   </body>
+    
+</body>
 </html>
 
 
