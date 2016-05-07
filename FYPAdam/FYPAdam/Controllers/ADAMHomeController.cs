@@ -16,13 +16,12 @@ namespace FYPAdam.Controllers
 {
     public class ADAMHomeController : Controller
     {
-
-        public JsonResult CompareProductAjax()
+        public JsonResult CompareProductAjax(string prodName1, string prodName2)
         {
             List<Product> prodList = new List<Product>();
             try
             {
-                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Utilities.EngineUrl + "Home/CompareProducts");
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Utilities.EngineUrl + "Home/CompareProducts?prodName1=" + prodName1 + "&prodName2=" + prodName2);
                 request.Timeout = 12000000;
                 request.KeepAlive = false;
                 request.ProtocolVersion = HttpVersion.Version10;
@@ -47,15 +46,17 @@ namespace FYPAdam.Controllers
             {
                 var pageContent = new StreamReader(wex.Response.GetResponseStream())
                         .ReadToEnd();
-                return this.Json("", JsonRequestBehavior.AllowGet);
+                return this.Json(new { Success = false });
             }
         }
 
 
+
         public JsonResult AllProductTtiles()
         {
-            try{
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Utilities.EngineUrl + "Home/AllProductTtiles");
+            try
+            {
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Utilities.EngineUrl + "Home/AllProductTtiles");
                 request.Timeout = 12000000;
                 request.KeepAlive = false;
                 request.ProtocolVersion = HttpVersion.Version10;
