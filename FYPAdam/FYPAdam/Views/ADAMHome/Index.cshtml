@@ -153,227 +153,37 @@
 
 </head>
 <body style="background-color: white">
-
-
-    <!--Hero_Section-->
-    <div class="container">
-        <section id="hero_section" class="top_cont_outer">
-            <div class="hero_wrapper">
-                <div class="container">
-                    <div class="hero_section">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="top_left_cont zoomIn wow animated">
-                                    <h2>Find the best of <strong>laptops and phones</strong> you look for </h2>
-                                    <p>
-                                        ADAM - Analyze Data and Market is a social networking assistant that helps you choose best products among many in your area of interest.
-                                        <br />
-                                        Best laptops and phones with detailed specs and reviews to let you choose wisely.
-                                    </p>
-                                    <a href="#service" class="read_more2">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--Hero_Section-->
-        <!--TOP TRENDS-->
-        <section id="topTrends">
-            <div id="topRatedProds">
-                <div style="align-self: center">
-                    <h2 id="topRated">Top Rated Products</h2>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="just-padding">
-
-                            <div class="list-group list-group-root well">
-                                <a href="#" class="list-group-item active" id="Laptop">Laptop</a>
-                                @{
-                                    int i = 1;
-                                    int j = 1;
-                                }
-
-                                @foreach (var cat in @ViewBag.NameOfCategories)
-                                {
-                                    if (cat.Name.Equals("Laptop"))
-                                    {
-                                        foreach (var b in cat.Brands)
-                                        {
-
-
-                                            if (@i <= 3)
-                                            {
-                                                <div class="list-group">
-
-                                                    <a href='@Url.Action("Index", "ADAMHome", new { catName = "Laptop", bName = @b.Name })' class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.Name.ToUpper()</a>
-                                                    @{
-                                                ++i;
-                                                    }
-
-                                                </div>
-                                            }
-                                        }
-
-                                        <a href="#demo4" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#Laptop"><span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;&nbsp;More Brands</a>
-                                        <div class="collapse" id="demo4">
-
-                                            @foreach (var b in cat.Brands)
-                                            {
-
-                                                if (@j > 3)
-                                                {
-
-                                                    <a href="@Url.Action("Index", "ADAMHome", new { catName = "Laptop", bName = @b.Name })" class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.Name.ToUpper()</a>
-
-
-                                                }
-
-                                                ++j;
-
-                                            }
-                                        </div>
-
-                                    }
-                                }
-                                <a href="#" class="list-group-item active" id="MobilePhones">MobilePhones</a>
-                                @{
-                                    i = 1;
-                                    j = 1;
-                                }
-
-                                @foreach (var cat in @ViewBag.NameOfCategories)
-                                {
-                                    if (cat.Name.Equals("MobilePhones"))
-                                    {
-                                        foreach (var b in cat.Brands)
-                                        {
-
-
-                                            if (@i <= 3)
-                                            {
-                                                <div class="list-group">
-
-                                                    <a href='@Url.Action("Index", "ADAMHome", new { catName = "MobilePhones", bName = @b.Name })' class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.Name.ToUpper()</a>
-                                                    @{
-                                                ++i;
-                                                    }
-
-                                                </div>
-                                            }
-                                        }
-
-                                        <a href="#demo5" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#Mobile"><span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;&nbsp;More Brands</a>
-                                        <div class="collapse" id="demo5">
-
-                                            @foreach (var b in cat.Brands)
-                                            {
-
-                                                if (@j > 3)
-                                                {
-
-                                                    <a href="@Url.Action("Index", "ADAMHome", new { catName = "MobilePhones", bName = @b.Name })" class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.Name.ToUpper()</a>
-
-
-                                                }
-
-                                                ++j;
-
-                                            }
-                                        </div>
-
-                                    }
-                                }
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="rcorners" id="topProducts">
-                            @{
-                                int bId = 0;
-                            }
-
-                            @foreach (var p in @ViewBag.ProductList)
-                            {  <div class="row" id="product">
-                                @if (p.CategoryId == 1)
-                                {
-                                    bId = p.BrandId;
-                                    <div class="col-lg-3">
-                                        <a href="#">
-                                            <img src='@p.ImageUrl' alt="review" id="productImage">
-                                        </a>
-                                    </div>
-                                    <div class="col-lg-7">
-                                        <div class="row">
-                                            <a href="@Url.Action("ProductDetails", "ADAMHome", new {pId=@p.Id})">
-                                                <h4 class="h4FontSize">@p.Title</h4>
-                                            </a>
-                                        </div>
-                                        <div class="row">
-                                            <span class="stars-container stars-@p.Rating">?????</span>
-                                        </div>
-                                    </div>
-                                    <br />
-                                }
-                                @if (p.CategoryId == 2)
-                                {
-                                    bId = p.BrandId;
-                                    <div class="col-lg-2">
-                                        <a href="#">
-                                            <img src='@p.ImageUrl' alt="review" id="productImage">
-                                        </a>
-                                    </div>
-                                    <div class="col-lg-10">
-                                        <div class="row">
-                                            <a href="@Url.Action("ProductDetails", "ADAMHome", new {pId=@p.Id})">
-                                                <h4 class="h4FontSize">@p.Title</h4>
-                                            </a>
-                                        </div>
-                                        <div class="row">
-                                            <span class="stars-container stars-@p.Rating">?????</span>
-                                        </div>
-                                        <div class="row">
-                                            <p>Review</p>
-                                        </div>
-                                    </div>
-                                    <br />
-                                }
-
-
-                            </div>
-                            }
-                            <br />
-                            <div class="row">
-                                <div class="col-lg-8"></div>
-                                <div class="col-lg-2">
-                                    <button type="button" class="btn btn-primary btn-lg" onclick="location.href = '../../ADAMHome/Products?bId='+@bId">See More</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <br />
-
-                    </div>
-
-                    <div class="col-lg-4">
-                        <div class="row">
-                            <div class="trendsBox" id="trendsBox1">
-                            </div>
-                        </div>
-
-                        <div class="row" style="margin-top: 10px">
-                            <div class="trendsBox" id="linechart">
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--TOP TRENDS-->
-    </div>
-
+    <div class="container"> <section id="hero_section" class="top_cont_outer"> <div class="hero_wrapper"> <div class="container"> <div class="hero_section"> <div class="row"> <div class="col-md-12"> <div class="top_left_cont zoomIn wow animated"> <h2>Find the best of <strong>laptops and phones</strong> you look for </h2> <p> ADAM - Analyze Data and Market is a social networking assistant that helps you choose best products among many in your area of interest. <br /> Best laptops and phones with detailed specs and reviews to let you choose wisely. </p><a href="#service" class="read_more2">Read more</a> </div></div></div></div></div></div></section> <section id="topTrends"> <div id="topRatedProds"> <div style="align-self: center"> <h2 id="topRated">Top Rated Products</h2> </div><div class="row"> <div class="col-lg-3"> <div class="just-padding"> <div class="list-group list-group-root well"> <a href="#" class="list-group-item active" id="Laptop">Laptop</a> @{int i = 1; int j = 1;}@foreach (var cat in @ViewBag.NameOfCategories)
+    {
+        if (cat.Name.Equals("Laptop"))
+        {
+            foreach (var b in cat.Brands)
+            {
+                if (@i <= 3)
+                {<div class="list-group"> <a href='@Url.Action("Index", "ADAMHome", new{catName="Laptop", bName=@b.Name})' class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.Name.ToUpper()</a> @{++i;}</div>}
+            }<a href="#demo4" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#Laptop"><span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;&nbsp;More Brands</a> <div class="collapse" id="demo4"> @foreach (var b in cat.Brands)
+            {
+                if (@j > 3)
+                {<a href="@Url.Action("Index", "ADAMHome", new{catName="Laptop", bName=@b.Name})" class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.Name.ToUpper()</a>} ++j;
+            }</div>}
+    }<a href="#" class="list-group-item active" id="MobilePhones">MobilePhones</a> @{i = 1; j = 1;}@foreach (var cat in @ViewBag.NameOfCategories)
+    {
+        if (cat.Name.Equals("MobilePhones"))
+        {
+            foreach (var b in cat.Brands)
+            {
+                if (@i <= 3)
+                {<div class="list-group"> <a href='@Url.Action("Index", "ADAMHome", new{catName="MobilePhones", bName=@b.Name})' class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.Name.ToUpper()</a> @{++i;}</div>}
+            }<a href="#demo5" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#Mobile"><span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;&nbsp;More Brands</a> <div class="collapse" id="demo5"> @foreach (var b in cat.Brands)
+            {
+                if (@j > 3)
+                {<a href="@Url.Action("Index", "ADAMHome", new{catName="MobilePhones", bName=@b.Name})" class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.Name.ToUpper()</a>} ++j;
+            }</div>}
+    }</div></div></div><div class="col-lg-5"> <div class="rcorners" id="topProducts"> @{int bId = 0;}@foreach (var p in @ViewBag.ProductList)
+    {<div class="row" id="product"> @if (p.CategoryId == 1)
+    {
+        bId = p.BrandId; <div class="col-lg-3"> <a href="#"> <img src='@p.ImageUrl' alt="review" id="productImage"> </a> </div><div class="col-lg-7"> <div class="row"> <a href="@Url.Action("ProductDetails", "ADAMHome", new{pId=@p.Id})"> <h4 class="h4FontSize">@p.Title</h4> </a> </div><div class="row"> <span class="stars-container stars-@p.Rating">?????</span> </div></div><br />}@if (p.CategoryId == 2)
+        {
+            bId = p.BrandId; <div class="col-lg-2"> <a href="#"> <img src='@p.ImageUrl' alt="review" id="productImage"> </a> </div><div class="col-lg-10"> <div class="row"> <a href="@Url.Action("ProductDetails", "ADAMHome", new{pId=@p.Id})"> <h4 class="h4FontSize">@p.Title</h4> </a> </div><div class="row"> <span class="stars-container stars-@p.Rating">?????</span> </div><div class="row"> <p>Review</p></div></div><br />}</div>}<br /> <div class="row"> <div class="col-lg-8"></div><div class="col-lg-2"> <button type="button" class="btn btn-primary btn-lg" onclick="location.href='../../ADAMHome/Products?bId='+@bId">See More</button> </div></div></div><br /> </div><div class="col-lg-4"> <div class="row"> <div class="trendsBox" id="trendsBox1"> </div></div><div class="row" style="margin-top: 10px"> <div class="trendsBox" id="linechart"> </div></div></div></div></div></section> </div>
 </body>
 </html>
