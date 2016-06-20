@@ -10,6 +10,7 @@ namespace FYPAdam
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/bootstrap.min.js",
                         "~/Scripts/jquery-1.11.0.min.js",
                         "~/Scripts/jquery-scrolltofixed.js",
                         "~/Scripts/jquery.nav.js", 
