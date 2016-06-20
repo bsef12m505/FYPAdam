@@ -22,36 +22,7 @@
             var negativeFeatures = @Html.Raw(Json.Encode(@ViewBag.nFeatureList));
             var FeatureCount=@Html.Raw(Json.Encode(@ViewBag.nCountList));
             var listColors=@Html.Raw(Json.Encode(@ViewBag.color));
-            var data = new google.visualization.DataTable();
-            data.addColumn('string', 'Name');
-            data.addColumn('number', 'Value');
-            data.addColumn({ type: 'string', role: 'style' });
-            data.addRows([
-                ['2014', 600, 'color: #9d426b'],
-                ['2015', 700, 'color: #3fb0e9'],
-                ['2016', 800, 'color: #42c698'],
-                ['2016', 900, 'color: red'],
-                ['2016', 1000, 'color: gold']
-            ]);
-
-            var options = {
-                chart: {
-                    title: 'Company Performance',
-                    subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-                },
-                title: 'Trending Products Chart',
-                hAxis: {
-                    title: 'Popularity',
-                },
-                bars: 'horizontal', // Required for Material Bar Charts.
-                width: 712,
-                height: 370,
-                legend: { position: 'none' },
-            };
-
-
-            var chart = new google.visualization.BarChart(document.getElementById('prodDesc'));
-            chart.draw(data, options);
+          
 
             var data1 = new google.visualization.DataTable();
             data1.addColumn('string', 'Name');

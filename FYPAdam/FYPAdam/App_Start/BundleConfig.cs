@@ -9,7 +9,16 @@ namespace FYPAdam
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js"));
+                        "~/Scripts/jquery-{version}.js",
+                        "~/Scripts/jquery-1.11.0.min.js",
+                        "~/Scripts/jquery-scrolltofixed.js",
+                        "~/Scripts/jquery.nav.js", 
+                        "~/Scripts/jquery.easing.1.3.js", 
+                        "~/Scripts/jquery.isotope.js", 
+                        "~/Scripts/fancybox/jquery.fancybox.pack.js", 
+                        "~/Scripts/wow.js",
+                        "~/Scripts/jquery.reveal.js",
+                        "~/Scripts/plugins/flot/jquery.reveal.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryui").Include(
                         "~/Scripts/jquery-ui-{version}.js"));
@@ -23,7 +32,15 @@ namespace FYPAdam
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
                         "~/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+            bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css",
+                "~/Content/bootstrap.min.css",
+                "~/Scripts/fancybox/jquery.fancybox.css",
+                "~/font-awesome/css/style.css",
+                "~/font-awesome/css/font-awesome.css",
+                "~/font-awesome/css/animate.css",
+                "~/Content/Custom.css",
+                "~/Content/reveal.css",
+                "~/Content/External/dist/css/jquery-ui.css"));
 
             bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
                         "~/Content/themes/base/jquery.ui.core.css",
@@ -38,6 +55,8 @@ namespace FYPAdam
                         "~/Content/themes/base/jquery.ui.datepicker.css",
                         "~/Content/themes/base/jquery.ui.progressbar.css",
                         "~/Content/themes/base/jquery.ui.theme.css"));
+
+            BundleTable.EnableOptimizations = true;
         }
     }
 }
