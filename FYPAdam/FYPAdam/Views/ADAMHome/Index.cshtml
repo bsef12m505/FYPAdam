@@ -1,379 +1,43 @@
-﻿@{
-    ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/Navbar.cshtml";
-}
-@using DTO;
-<!doctype html>
+﻿@{ViewBag.Title = "Index"; Layout = "~/Views/Shared/Navbar.cshtml";}@using DTO;<!doctype html>
 <html>
 <head>
     <title></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, maximum-scale=1">
-
-
-    <script type="text/javascript">
-
-        google.charts.load('current', { 'packages': ['bar', 'line', 'corechart'] });
-        google.charts.setOnLoadCallback(drawChart);
-        function drawChart() {
-
-            //var data = google.visualization.arrayToDataTable([
-            //  ['Year', 'Sales', 'Expenses', 'Profit'],
-            //  ['2014', 1000, 400, 200],
-            //  ['2015', 1170, 460, 250],
-            //  ['2016', 660, 1120, 300],
-            //  ['2017', 1030, 540, 350]
-            //]);
-
-            //var options = {
-            //    chart: {
-            //        title: 'Company Performance',
-            //        subtitle: 'Sales, Expenses, and Profit: 2014-2017',
-            //    },
-            //    bars: 'vertical', // Required for Material Bar Charts.
-            //    width: 320,
-            //    height: 290
-            //};
-
-            //var chart = new google.charts.Bar(document.getElementById('trendsBox1'));
-
-            //chart.draw(data, options);
-
-
-
-
-
-            @*google.charts.setOnLoadCallback(drawChartLine);*@
-            //var data1 = new google.visualization.DataTable();
-            //data1.addColumn('number', 'Day');
-            //data1.addColumn('number', 'Guardians ');
-            //data1.addColumn('number', 'The Avengers');
-            //data1.addColumn('number', 'Transformers');
-
-            //data1.addRows([
-            //  [1, 37.8, 80.8, 41.8],
-            //  [2, 30.9, 69.5, 32.4],
-            //  [3, 25.4, 57, 25.7],
-            //  [4, 11.7, 18.8, 10.5],
-            //  [5, 11.9, 17.6, 10.4],
-            //  [6, 8.8, 13.6, 7.7],
-            //  [7, 7.6, 12.3, 9.6],
-            //  [8, 12.3, 29.2, 10.6],
-            //  [9, 16.9, 42.9, 14.8],
-            //  [10, 12.8, 30.9, 11.6],
-            //  [11, 5.3, 7.9, 4.7],
-            //  [12, 6.6, 8.4, 5.2],
-            //  [13, 4.8, 6.3, 3.6],
-            //  [14, 4.2, 6.2, 3.4]
-            //]);
-
-            //var options1 = {
-            //    chart: {
-            //        title: 'Box Office Earnings in First Two Weeks of Opening',
-            //        subtitle: 'in millions of dollars (USD)'
-            //    },
-            //    width: 320,
-            //    height: 290
-            //};
-
-            //var chart1 = new google.charts.Line(document.getElementById('linechart'));
-
-            //chart1.draw(data1, options1);
-
-
-            //pie chart
-            var array = @Html.Raw(Json.Encode(@ViewBag.followersCountArray));
-            var array1=@Html.Raw(Json.Encode(@ViewBag.brandNameArray));
-
-            var data2 = new google.visualization.DataTable();
-            data2.addColumn('string', 'BrandName');
-            data2.addColumn('number', 'FollowersCount');
-            data2.addRows(array.length);
-            for (var i = 0; i < array.length; i++) {
-                data2.setCell(i, 0, array1[i]);
-                data2.setCell(i,1, array[i]);
-            }
-
-            var options2 = {
-
-                title: 'Trending Mobile Brands',
-                titleFontSize:15,
-                chartArea:{left:30,top:20,width:"140%",height:"130%"},
-
-
-
-            };
-
-            var chart2 = new google.visualization.PieChart(document.getElementById('trendsBox1'));
-
-            chart2.draw(data2, options2);
-
-            //bar chart
-            var laptopFollowers = @Html.Raw(Json.Encode(@ViewBag.LaptopfollowersCountArray));
-            var laptopBrandNames=@Html.Raw(Json.Encode(@ViewBag.LaptopbrandNameArray));
-            var color=['color: #9d426b','color: #3fb0e9','color: #42c698','color: red','color: gold','color: green'];
-            var data3 = new google.visualization.DataTable();
-            data3.addColumn('string', 'BrandName');
-            data3.addColumn('number', 'FollowersCount');
-            data3.addColumn({ type: 'string', role: 'style' });
-            data3.addRows(laptopBrandNames.length);
-            for (var i = 0; i < laptopBrandNames.length; i++) {
-                data3.setCell(i, 0, laptopBrandNames[i]);
-                data3.setCell(i,1, laptopFollowers[i]);
-                data3.setCell(i,2, color[i]);
-            }
-            //data3.addRows([
-            //    ['2014', 600, 'color: #9d426b'],
-            //    ['2015', 700, 'color: #3fb0e9'],
-            //    ['2016', 800, 'color: #42c698'],
-            //    ['2016', 900, 'color: red'],
-            //    ['2016', 1000, 'color: gold']
-            //]);
-
-            var options3 = {
-
-                title: 'Trending Laptop Brands',
-                titleFontSize:15,
-                legend: {position: 'none'},
-                width: 330,
-                height: 270
-            };
-
-
-            var chart3 = new google.visualization.ColumnChart(document.getElementById('linechart'));
-            chart3.draw(data3, options3);
-
-
-        }
-
-    </script>
-
-
-
-
+    <script type="text/javascript">google.charts.load('current',{'packages': ['bar', 'line', 'corechart']}); google.charts.setOnLoadCallback(drawChart); function drawChart(){//var data=google.visualization.arrayToDataTable([ // ['Year', 'Sales', 'Expenses', 'Profit'], // ['2014', 1000, 400, 200], // ['2015', 1170, 460, 250], // ['2016', 660, 1120, 300], // ['2017', 1030, 540, 350] //]); //var options={// chart:{// title: 'Company Performance', // subtitle: 'Sales, Expenses, and Profit: 2014-2017', //}, // bars: 'vertical', // Required for Material Bar Charts. // width: 320, // height: 290 //}; //var chart=new google.charts.Bar(document.getElementById('trendsBox1')); //chart.draw(data, options); @*google.charts.setOnLoadCallback(drawChartLine);*@ //var data1=new google.visualization.DataTable(); //data1.addColumn('number', 'Day'); //data1.addColumn('number', 'Guardians '); //data1.addColumn('number', 'The Avengers'); //data1.addColumn('number', 'Transformers'); //data1.addRows([ // [1, 37.8, 80.8, 41.8], // [2, 30.9, 69.5, 32.4], // [3, 25.4, 57, 25.7], // [4, 11.7, 18.8, 10.5], // [5, 11.9, 17.6, 10.4], // [6, 8.8, 13.6, 7.7], // [7, 7.6, 12.3, 9.6], // [8, 12.3, 29.2, 10.6], // [9, 16.9, 42.9, 14.8], // [10, 12.8, 30.9, 11.6], // [11, 5.3, 7.9, 4.7], // [12, 6.6, 8.4, 5.2], // [13, 4.8, 6.3, 3.6], // [14, 4.2, 6.2, 3.4] //]); //var options1={// chart:{// title: 'Box Office Earnings in First Two Weeks of Opening', // subtitle: 'in millions of dollars (USD)' //}, // width: 320, // height: 290 //}; //var chart1=new google.charts.Line(document.getElementById('linechart')); //chart1.draw(data1, options1); //pie chart var array=@Html.Raw(Json.Encode(@ViewBag.followersCountArray)); var array1=@Html.Raw(Json.Encode(@ViewBag.brandNameArray)); var data2=new google.visualization.DataTable(); data2.addColumn('string', 'BrandName'); data2.addColumn('number', 'FollowersCount'); data2.addRows(array.length); for (var i=0; i < array.length; i++){data2.setCell(i, 0, array1[i]); data2.setCell(i,1, array[i]);}var options2={title: 'Trending Mobile Brands', titleFontSize:15, chartArea:{left:30,top:20,width:"140%",height:"130%"},}; var chart2=new google.visualization.PieChart(document.getElementById('trendsBox1')); chart2.draw(data2, options2); //bar chart var laptopFollowers=@Html.Raw(Json.Encode(@ViewBag.LaptopfollowersCountArray)); var laptopBrandNames=@Html.Raw(Json.Encode(@ViewBag.LaptopbrandNameArray)); var color=['color: #9d426b','color: #3fb0e9','color: #42c698','color: red','color: gold','color: green']; var data3=new google.visualization.DataTable(); data3.addColumn('string', 'BrandName'); data3.addColumn('number', 'FollowersCount'); data3.addColumn({type: 'string', role: 'style'}); data3.addRows(laptopBrandNames.length); for (var i=0; i < laptopBrandNames.length; i++){data3.setCell(i, 0, laptopBrandNames[i]); data3.setCell(i,1, laptopFollowers[i]); data3.setCell(i,2, color[i]);}//data3.addRows([ // ['2014', 600, 'color: #9d426b'], // ['2015', 700, 'color: #3fb0e9'], // ['2016', 800, 'color: #42c698'], // ['2016', 900, 'color: red'], // ['2016', 1000, 'color: gold'] //]); var options3={title: 'Trending Laptop Brands', titleFontSize:15, legend:{position: 'none'}, width: 330, height: 270}; var chart3=new google.visualization.ColumnChart(document.getElementById('linechart')); chart3.draw(data3, options3);}</script>
 </head>
 <body style="background-color: white">
-
-
-    <!--Hero_Section-->
-    <div class="container">
-        <section id="hero_section" class="top_cont_outer">
-            <div class="hero_wrapper">
-                <div class="container">
-                    <div class="hero_section">
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="top_left_cont zoomIn wow animated">
-                                    <h2>Find the best of <strong>laptops and phones</strong> you look for </h2>
-                                    <p>
-                                        ADAM - Analyze Data and Market is a social networking assistant that helps you choose best products among many in your area of interest.
-                                        <br />
-                                        Best laptops and phones with detailed specs and reviews to let you choose wisely.
-                                    </p>
-                                    <a href="#service" class="read_more2">Read more</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--Hero_Section-->
-        <!--TOP TRENDS-->
-        <section id="topTrends">
-            <div id="topRatedProds">
-                <div style="align-self: center">
-                    <h2 id="topRated">Top Rated Products</h2>
-                </div>
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="just-padding">
-
-                            <div class="list-group list-group-root well">
-                                <a href="#" class="list-group-item active" id="Laptop">Laptop</a>
-                                @{
-                                    int i = 1;
-                                    int j = 1;
-                                }
-
-                                @foreach (var cat in @ViewBag.NameOfCategories)
-                                {
-                                    if (cat.Name.Equals("Laptop"))
-                                    {
-                                        foreach (var b in cat.Brands)
-                                        {
-
-
-                                            if (@i <= 3)
-                                            {
-                                                <div class="list-group">
-
-                                                    <a href='@Url.Action("Index", "ADAMHome", new { catName = "Laptop", bName = @b.Name })' class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.Name.ToUpper()</a>
-                                                    @{
-                                                ++i;
-                                                    }
-
-                                                </div>
-                                            }
-                                        }
-
-                                        <a href="#demo4" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#Laptop"><span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;&nbsp;More Brands</a>
-                                        <div class="collapse" id="demo4">
-
-                                            @foreach (var b in cat.Brands)
-                                            {
-
-                                                if (@j > 3)
-                                                {
-
-                                                    <a href="@Url.Action("Index", "ADAMHome", new { catName = "Laptop", bName = @b.Name })" class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.Name.ToUpper()</a>
-
-
-                                                }
-
-                                                ++j;
-
-                                            }
-                                        </div>
-
-                                    }
-                                }
-                                <a href="#" class="list-group-item active" id="MobilePhones">MobilePhones</a>
-                                @{
-                                    i = 1;
-                                    j = 1;
-                                }
-
-                                @foreach (var cat in @ViewBag.NameOfCategories)
-                                {
-                                    if (cat.Name.Equals("MobilePhones"))
-                                    {
-                                        foreach (var b in cat.Brands)
-                                        {
-
-
-                                            if (@i <= 3)
-                                            {
-                                                <div class="list-group">
-
-                                                    <a href='@Url.Action("Index", "ADAMHome", new { catName = "MobilePhones", bName = @b.Name })' class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.Name.ToUpper()</a>
-                                                    @{
-                                                ++i;
-                                                    }
-
-                                                </div>
-                                            }
-                                        }
-
-                                        <a href="#demo5" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#Mobile"><span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;&nbsp;More Brands</a>
-                                        <div class="collapse" id="demo5">
-
-                                            @foreach (var b in cat.Brands)
-                                            {
-
-                                                if (@j > 3)
-                                                {
-
-                                                    <a href="@Url.Action("Index", "ADAMHome", new { catName = "MobilePhones", bName = @b.Name })" class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.Name.ToUpper()</a>
-
-
-                                                }
-
-                                                ++j;
-
-                                            }
-                                        </div>
-
-                                    }
-                                }
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-5">
-                        <div class="rcorners" id="topProducts">
-                            @{
-                                int bId = 0;
-                            }
-
-                            @foreach (var p in @ViewBag.ProductList)
-                            {  <div class="row" id="product">
-                                @if (p.CategoryId == 1)
-                                {
-                                    bId = p.BrandId;
-                                    <div class="col-lg-3">
-                                        <a href="#">
-                                            <img src='@p.ImageUrl' alt="review" id="productImage">
-                                        </a>
-                                    </div>
-                                    <div class="col-lg-7">
-                                        <div class="row">
-                                            <a href="@Url.Action("ProductDetails", "ADAMHome", new {pId=@p.Id})">
-                                                <h4 class="h4FontSize">@p.Title</h4>
-                                            </a>
-                                        </div>
-                                        <div class="row">
-                                            <span class="stars-container stars-@p.Rating">?????</span>
-                                        </div>
-                                    </div>
-                                    <br />
-                                }
-                                @if (p.CategoryId == 2)
-                                {
-                                    bId = p.BrandId;
-                                    <div class="col-lg-2">
-                                        <a href="#">
-                                            <img src='@p.ImageUrl' alt="review" id="productImage">
-                                        </a>
-                                    </div>
-                                    <div class="col-lg-10">
-                                        <div class="row">
-                                            <a href="@Url.Action("ProductDetails", "ADAMHome", new {pId=@p.Id})">
-                                                <h4 class="h4FontSize">@p.Title</h4>
-                                            </a>
-                                        </div>
-                                        <div class="row">
-                                            <span class="stars-container stars-@p.Rating">?????</span>
-                                        </div>
-                                        <div class="row">
-                                            <p>Review</p>
-                                        </div>
-                                    </div>
-                                    <br />
-                                }
-
-
-                            </div>
-                            }
-                            <br />
-                            <div class="row">
-                                <div class="col-lg-8"></div>
-                                <div class="col-lg-2">
-                                    <button type="button" class="btn btn-primary btn-lg" onclick="location.href = '../../ADAMHome/Products?bId='+@bId">See More</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <br />
-
-                    </div>
-
-                    <div class="col-lg-4">
-                        <div class="row">
-                            <div class="trendsBox" id="trendsBox1">
-                            </div>
-                        </div>
-
-                        <div class="row" style="margin-top: 10px">
-                            <div class="trendsBox" id="linechart">
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!--TOP TRENDS-->
-    </div>
-
+    <div class="container"> <section id="hero_section" class="top_cont_outer"> <div class="hero_wrapper"> <div class="container"> <div class="hero_section"> <div class="row"> <div class="col-md-12"> <div class="top_left_cont zoomIn wow animated"> <h2>Find the best of <strong>laptops and phones</strong> you look for </h2> <p> ADAM - Analyze Data and Market is a social networking assistant that helps you choose best products among many in your area of interest. <br /> Best laptops and phones with detailed specs and reviews to let you choose wisely. </p><a href="#service" class="read_more2">Read more</a> </div></div></div></div></div></div></section> <section id="topTrends"> <div id="topRatedProds"> <div style="align-self: center"> <h2 id="topRated">Top Rated Products</h2> </div><div class="row"> <div class="col-lg-3"> <div class="just-padding"> <div class="list-group list-group-root well"> <a href="#" class="list-group-item active" id="Laptop">Laptop</a> @{int i = 1; int j = 1;}@foreach (var cat in @ViewBag.NameOfCategories)
+    {
+        if (cat.Name.Equals("Laptop"))
+        {
+            foreach (var b in cat.Brands)
+            {
+                if (@i <= 3)
+                {<div class="list-group"> <a href='@Url.Action("Index", "ADAMHome", new{catName="Laptop", bName=@b.Name})' class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.Name.ToUpper()</a> @{++i;}</div>}
+            }<a href="#demo4" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#Laptop"><span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;&nbsp;More Brands</a> <div class="collapse" id="demo4"> @foreach (var b in cat.Brands)
+            {
+                if (@j > 3)
+                {<a href="@Url.Action("Index", "ADAMHome", new{catName="Laptop", bName=@b.Name})" class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.Name.ToUpper()</a>} ++j;
+            }</div>}
+    }<a href="#" class="list-group-item active" id="MobilePhones">MobilePhones</a> @{i = 1; j = 1;}@foreach (var cat in @ViewBag.NameOfCategories)
+    {
+        if (cat.Name.Equals("MobilePhones"))
+        {
+            foreach (var b in cat.Brands)
+            {
+                if (@i <= 3)
+                {<div class="list-group"> <a href='@Url.Action("Index", "ADAMHome", new{catName="MobilePhones", bName=@b.Name})' class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.Name.ToUpper()</a> @{++i;}</div>}
+            }<a href="#demo5" class="list-group-item list-group-item" data-toggle="collapse" data-parent="#Mobile"><span class="glyphicon glyphicon-triangle-bottom"></span>&nbsp;&nbsp;More Brands</a> <div class="collapse" id="demo5"> @foreach (var b in cat.Brands)
+            {
+                if (@j > 3)
+                {<a href="@Url.Action("Index", "ADAMHome", new{catName="MobilePhones", bName=@b.Name})" class="list-group-item"><span class="glyphicon glyphicon-menu-right"></span>&nbsp;&nbsp;@b.Name.ToUpper()</a>} ++j;
+            }</div>}
+    }</div></div></div><div class="col-lg-5"> <div class="rcorners" id="topProducts"> @{int bId = 0;}@foreach (var p in @ViewBag.ProductList)
+    {<div class="row" id="product"> @if (p.CategoryId == 1)
+    {
+        bId = p.BrandId; <div class="col-lg-3"> <a href="#"> <img src='@p.ImageUrl' alt="review" id="productImage"> </a> </div><div class="col-lg-7"> <div class="row"> <a href="@Url.Action("ProductDetails", "ADAMHome", new{pId=@p.Id})"> <h4 class="h4FontSize">@p.Title</h4> </a> </div><div class="row"> <span class="stars-container stars-@p.Rating">?????</span> </div></div><br />}@if (p.CategoryId == 2)
+        {
+            bId = p.BrandId; <div class="col-lg-2"> <a href="#"> <img src='@p.ImageUrl' alt="review" id="productImage"> </a> </div><div class="col-lg-10"> <div class="row"> <a href="@Url.Action("ProductDetails", "ADAMHome", new{pId=@p.Id})"> <h4 class="h4FontSize">@p.Title</h4> </a> </div><div class="row"> <span class="stars-container stars-@p.Rating">?????</span> </div><div class="row"> <p>Review</p></div></div><br />}</div>}<br /> <div class="row"> <div class="col-lg-8"></div><div class="col-lg-2"> <button type="button" class="btn btn-primary btn-lg" onclick="location.href='../../ADAMHome/Products?bId='+@bId">See More</button> </div></div></div><br /> </div><div class="col-lg-4"> <div class="row"> <div class="trendsBox" id="trendsBox1"> </div></div><div class="row" style="margin-top: 10px"> <div class="trendsBox" id="linechart"> </div></div></div></div></div></section> </div>
 </body>
 </html>
